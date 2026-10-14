@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <meta name="description"
+    content="OLEYO NELSON — computer science student, creative developer, and basketball player.">
+  <title>OLEYO NELSON | Creative Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #101010;
+      --paper: #f2eee8;
+      --muted: #a8a39d;
+      --orange: #ff8a00;
+      --line: rgba(255, 255, 255, .13);
+      --max: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Manrope, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .mono {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .7rem;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 9vw));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 25px 4.5vw;
+      color: white;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -.06em;
+      font-size: 1.15rem;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--orange);
+      color: #111;
+      font-size: .85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      opacity: .82;
+      transition: color .25s, opacity .25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange);
+      opacity: 1;
+    }
+
+    .nav-cta {
+      background: var(--orange);
+      color: #111;
+      padding: 12px 17px;
+      border-radius: 3px;
+      font-weight: 800;
+      font-size: .7rem;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px #ff8a0044;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: 0;
+      color: white;
+      font-size: 1.6rem;
+    }
+
+    .hero {
+      min-height: 790px;
+      height: 100svh;
+      max-height: 1000px;
+      position: relative;
+      overflow: hidden;
+      background: #141414;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(8, 10, 10, .86), rgba(8, 10, 10, .54) 55%, rgba(8, 10, 10, .30)), linear-gradient(0deg, #101010 0%, transparent 35%), url("bgp.jpg") center 42%/cover;
+      transform: scale(1.06);
+      animation: heroZoom 14s ease-out forwards;
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 75% 35%, transparent 0, rgba(0, 0, 0, .14) 50%, rgba(0, 0, 0, .45));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max), calc(100% - 9vw));
+      margin: 50px auto 0;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #f4c58e;
+      margin-bottom: 25px;
+      animation: rise .8s .1s both;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--orange);
+    }
+
+    h1 {
+      max-width: 1000px;
+      font-size: clamp(4.2rem, 10vw, 9.6rem);
+      line-height: .86;
+      letter-spacing: -.09em;
+      font-weight: 800;
+      animation: rise .9s .22s both;
+    }
+
+    h1 .outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, .86);
+    }
+
+    h1 .accent {
+      color: var(--orange);
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-top: 36px;
+      animation: rise .9s .4s both;
+    }
+
+    .hero-desc {
+      color: #ddd;
+      max-width: 440px;
+      font-size: .96rem;
+      line-height: 1.8;
+    }
+
+    .scroll-cue {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      color: white;
+      font-size: .65rem;
+    }
+
+    .scroll-cue span {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border: 1px solid #ffffff70;
+      border-radius: 50%;
+      animation: bob 2s infinite;
+    }
+
+    .scroll-cue b {
+      color: var(--orange);
+      font-size: 1.2rem;
+    }
+
+    .hero-index {
+      position: absolute;
+      right: 4.5vw;
+      top: 50%;
+      writing-mode: vertical-rl;
+      color: #ffffff90;
+    }
+
+    .section {
+      padding: 120px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 55px;
+    }
+
+    .section-label {
+      color: #9a6a36;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(2.6rem, 6vw, 5.4rem);
+      line-height: .95;
+      letter-spacing: -.075em;
+    }
+
+    .section-intro {
+      max-width: 350px;
+      color: #6e6964;
+      line-height: 1.8;
+      font-size: .9rem;
+    }
+
+    .about {
+      background: #101010;
+      color: #f6f2ed;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border: 1px solid #ffffff0d;
+      border-radius: 50%;
+      right: -150px;
+      top: 15%;
+      box-shadow: 0 0 0 55px #ffffff04, 0 0 0 110px #ffffff03;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 9%;
+      align-items: center;
+      position: relative;
+    }
+
+    .about h2 {
+      margin-bottom: 28px;
+    }
+
+    .about-copy {
+      max-width: 610px;
+      color: #c5c1bc;
+      line-height: 1.95;
+      font-size: .96rem;
+    }
+
+    .about-copy strong {
+      color: white;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 45px;
+    }
+
+    .stat {
+      border-top: 1px solid #ffffff30;
+      padding-top: 17px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--orange);
+      font-size: 2rem;
+      letter-spacing: -.07em;
+    }
+
+    .stat span {
+      display: block;
+      color: #aaa5a0;
+      font-size: .68rem;
+      margin-top: 6px;
+    }
+
+    .about-visual {
+      min-height: 440px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      width: min(100%, 400px);
+      aspect-ratio: 1;
+      border: 1px solid #ffffff23;
+      border-radius: 50%;
+      animation: spin 25s linear infinite;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--orange);
+      top: 18%;
+      left: 12%;
+      box-shadow: 0 0 22px var(--orange);
+    }
+
+    .orbit::after {
+      top: auto;
+      left: auto;
+      bottom: 15%;
+      right: 7%;
+      width: 7px;
+      height: 7px;
+      background: white;
+    }
+
+    .visual-card {
+      z-index: 1;
+      width: 78%;
+      min-height: 310px;
+      border: 1px solid #ffffff20;
+      background: linear-gradient(140deg, #242424, #121212);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: rotate(-4deg);
+      transition: transform .5s;
+    }
+
+    .visual-card:hover {
+      transform: rotate(0) translateY(-8px);
+    }
+
+    .visual-card .big-code {
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.09em;
+    }
+
+    .visual-card .big-code span {
+      color: var(--orange);
+    }
+
+    .visual-card .card-foot {
+      display: flex;
+      justify-content: space-between;
+      color: #aaa;
+      font-size: .65rem;
+    }
+
+    .skills {
+      background: #e8e2da;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .skill {
+      min-height: 180px;
+      padding: 25px;
+      border: 1px solid #d1c9c0;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s, transform .3s, color .3s;
+    }
+
+    .skill:hover {
+      background: var(--ink);
+      color: white;
+      transform: translateY(-7px);
+    }
+
+    .skill .number {
+      color: #9d968e;
+      font-size: .7rem;
+    }
+
+    .skill h3 {
+      margin-top: 42px;
+      font-size: 1.1rem;
+      letter-spacing: -.04em;
+    }
+
+    .skill p {
+      margin-top: 9px;
+      color: #817a72;
+      font-size: .76rem;
+      line-height: 1.6;
+    }
+
+    .skill:hover p {
+      color: #c9c4be;
+    }
+
+    .projects {
+      background: var(--paper);
+    }
+
+    .project-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .project {
+      background: white;
+      overflow: hidden;
+      border-radius: 4px;
+      transition: transform .4s, box-shadow .4s;
+    }
+
+    .project:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 55px #1d18130f;
+    }
+
+    .project-image {
+      height: 300px;
+      background: #d9d4ce;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .8s;
+    }
+
+    .project:hover .project-image img {
+      transform: scale(1.06);
+    }
+
+    .project-image .image-tag {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: var(--orange);
+      padding: 8px 10px;
+      font-size: .62rem;
+      font-weight: 800;
+    }
+
+    .project-body {
+      padding: 27px 28px 30px;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .project h3 {
+      font-size: 1.35rem;
+      letter-spacing: -.05em;
+    }
+
+    .project-arrow {
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #f1eee9;
+      transition: background .3s, transform .3s;
+    }
+
+    .project:hover .project-arrow {
+      background: var(--orange);
+      transform: rotate(45deg);
+    }
+
+    .project-body p {
+      color: #77716b;
+      font-size: .83rem;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tags span {
+      font-size: .62rem;
+      border: 1px solid #e0dcd6;
+      padding: 7px 9px;
+      color: #6b655f;
+    }
+
+    .basketball {
+      background: var(--orange);
+      color: #111;
+      padding: 90px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .basketball .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .basketball h2 {
+      max-width: 760px;
+    }
+
+    .basketball .cta {
+      border: 1px solid #111;
+      padding: 16px 22px;
+      font-weight: 800;
+      white-space: nowrap;
+      font-size: .75rem;
+      transition: background .25s, color .25s;
+    }
+
+    .basketball .cta:hover {
+      background: #111;
+      color: white;
+    }
+
+    .contact {
+      background: #101010;
+      color: white;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 10%;
+    }
+
+    .contact h2 {
+      margin-bottom: 28px;
+    }
+
+    .contact p {
+      color: #aaa5a0;
+      line-height: 1.8;
+      max-width: 440px;
+    }
+
+    .contact-link {
+      display: block;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      letter-spacing: -.05em;
+      border-bottom: 1px solid #ffffff30;
+      padding: 18px 0;
+      transition: color .25s;
+    }
+
+    .contact-link:hover {
+      color: var(--orange);
+    }
+
+    .contact-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+      color: #8e8983;
+      font-size: .68rem;
+    }
+
+    footer {
+      background: #101010;
+      color: #88827b;
+      border-top: 1px solid #ffffff1a;
+      padding: 22px 4.5vw;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: .68rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cursor-glow {
+      position: fixed;
+      pointer-events: none;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff8a0010, transparent 70%);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroZoom {
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(7px)
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width:850px) {
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .hero {
+        min-height: 720px;
+      }
+
+      .hero-content {
+        margin-top: 60px;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
+      }
+
+      .about-visual {
+        min-height: 350px;
+      }
+
+      .skill-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-image {
+        height: 240px;
+      }
+
+      .basketball .wrap {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width:520px) {
+
+      .wrap,
+      .hero-content {
+        width: calc(100% - 40px);
+      }
+
+      .nav {
+        padding: 20px;
+      }
+
+      .nav-cta {
+        padding: 10px 12px;
+      }
+
+      .hero {
+        min-height: 690px;
+        height: 94svh;
+      }
+
+      .hero-bg {
+        background-position: 57% center;
+      }
+
+      h1 {
+        font-size: clamp(3.6rem, 17vw, 5.5rem);
+      }
+
+      .hero-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-index {
+        display: none;
+      }
+
+      .section {
+        padding: 82px 0;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 35px;
+      }
+
+      .stats {
+        gap: 10px;
+      }
+
+      .stat strong {
+        font-size: 1.55rem;
+      }
+
+      .stat span {
+        font-size: .62rem;
+      }
+
+      .skill-grid,
+      .project-list {
+        grid-template-columns: 1fr;
+      }
+
+      .skill {
+        min-height: 150px;
+      }
+
+      .skill h3 {
+        margin-top: 28px;
+      }
+
+      .project-image {
+        height: 250px;
+      }
+
+      .visual-card {
+        width: 88%;
+        min-height: 270px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <nav class="nav">
+    <a class="brand" href="#home"><span class="brand-mark">ON</span> OLEYO NELSON</a>
+    <div class="nav-links">
+      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#skills">SKILLS</a><a href="#projects">PROJECTS</a><a
+        href="#contact">CONTACT</a>
+      <a class="nav-cta" href="#contact">LET'S CONNECT ↗</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="eyebrow mono">Computer Science · Basketball · Big Ideas</div>
+      <h1>I BUILD<br><span class="accent">DIGITAL</span><br><span class="outline">FUTURES.</span></h1>
+      <div class="hero-bottom">
+        <p class="hero-desc">I'm Oleyo Nelson — a curious mind, aspiring software developer, and basketball player. I
+          turn ideas into experiences and keep pushing toward the next level.</p>
+        <a class="scroll-cue mono" href="#about"><span><b>↓</b></span> SCROLL TO EXPLORE</a>
+      </div>
+    </div>
+    <div class="hero-index mono">PORTFOLIO — 2026</div>
+  </header>
+
+  <main>
+    <section class="section about" id="about">
+      <div class="wrap about-grid">
+        <div class="reveal">
+          <div class="section-label mono">01 / A LITTLE ABOUT ME</div>
+          <h2>Curiosity is<br>my <span style="color:var(--orange)">superpower.</span></h2>
+          <p class="about-copy">I’m <strong>Oleyo Nelson</strong>, a Computer Science student with a passion for
+            technology, creativity, and sport. I enjoy learning how things work, building practical digital experiences,
+            and finding new ways to solve problems. Away from the screen, basketball keeps me disciplined, competitive,
+            and team-focused.</p>
+          <div class="stats">
+            <div class="stat"><strong data-count="01">01</strong><span>Curious mindset</span></div>
+            <div class="stat"><strong data-count="24">24/7</strong><span>Always learning</span></div>
+            <div class="stat"><strong data-count="100">100%</strong><span>Driven by growth</span></div>
+          </div>
+        </div>
+        <div class="about-visual reveal">
+          <div class="orbit"></div>
+          <div class="visual-card">
+            <div class="mono" style="color:#aaa">CURRENT MODE / BUILD & LEARN</div>
+            <div class="big-code">HELLO,<br>I'M <span>OLEYO</span><br><span style="color:white">NELSON.</span></div>
+            <div class="card-foot"><span>CREATIVE THINKER</span><span>EST. ALWAYS</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills" id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label mono">02 / WHAT I BRING</div>
+            <h2>Skills &<br>interests.</h2>
+          </div>
+          <p class="section-intro">A mix of technical learning and the mindset I build on the court: consistency,
+            teamwork, and the courage to keep improving.</p>
+        </div>
+        <div class="skill-grid">
+          <article class="skill reveal"><span class="number mono">01 / TECH</span>
+            <h3>Programming</h3>
+            <p>Building a strong foundation in computer science and software development.</p>
+          </article>
+          <article class="skill reveal"><span class="number mono">02 / WEB</span>
+            <h3>Web Experiences</h3>
+            <p>Exploring clean interfaces, responsive layouts, and interactive websites.</p>
+          </article>
+          <article class="skill reveal"><span class="number mono">03 / MINDSET</span>
+            <h3>Problem Solving</h3>
+            <p>Breaking big challenges into smaller, practical steps.</p>
+          </article>
+          <article class="skill reveal"><span class="number mono">04 / COURT</span>
+            <h3>Basketball</h3>
+            <p>Discipline, teamwork, resilience, and a constant drive to get better.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section projects" id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label mono">03 / SELECTED WORK</div>
+            <h2>Ideas in<br>progress.</h2>
+          </div>
+          <p class="section-intro">A portfolio is a work in progress — just like me. Here are the kinds of projects and
+            experiences I’m building toward.</p>
+        </div>
+        <div class="project-list">
+          <article class="project reveal">
+            <div class="project-image"><img src="me.jpg" alt="Creative portfolio design reference"><span </div>
+                <p>A bold personal web presence inspired by modern portfolio layouts, strong typography, and expressive
+                  motion.</p>
+                <div class="tags"><span>HTML</span><span>CSS</span><span>ANIMATION</span></div>
+            </div>
+          </article>
+          <article class="project reveal">
+            <div class="project-image" style="background:#171717;display:grid;place-items:center;color:white">
+              <div style="text-align:center;padding:24px">
+                <div class="mono" style="color:var(--orange);margin-bottom:18px">IDEA / 002</div>
+                <div style="font-size:clamp(2.5rem,5vw,4.7rem);font-weight:800;letter-spacing:-.09em;line-height:.9">
+                  CODE<span style="color:var(--orange)">.</span><br>CREATE<span
+                    style="color:var(--orange)">.</span><br>REPEAT<span style="color:var(--orange)">.</span></div>
+              </div><span class="image-tag">IN DEVELOPMENT</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <h3>Developer Playground</h3><span class="project-arrow">↗</span>
+              </div>
+              <p>A space for experiments, small coding projects, and the lessons learned while becoming a better
+                developer.</p>
+              <div class="tags"><span>COMPUTER SCIENCE</span><span>EXPERIMENTS</span><span>LEARNING</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="basketball">
+      <div class="wrap reveal">
+        <div>
+          <div class="mono" style="margin-bottom:18px">OFF SCREEN / ON COURT</div>
+          <h2>Think like a builder.<br>Play like a teammate.</h2>
+        </div>
+        <a class="cta" href="#contact">LET'S TALK BASKETBALL ↗</a>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="reveal">
+          <div class="section-label mono">04 / YOUR TURN</div>
+          <h2>Have a good<br>idea? <span style="color:var(--orange)">Let's talk.</span></h2>
+          <p>Open to connecting with developers, creatives, basketball people, mentors, and anyone building something
+            meaningful.</p>
+          <div class="contact-meta"><span>OLEYO NELSON</span><span>AVAILABLE FOR CONNECTIONS</span></div>
+        </div>
+        <div class="reveal">
+          <!-- Replace the placeholder links below with your real contact details. -->
+          <a class="contact-link" href="mailto:oleyonelson88@gmail.com">Email me <span
+              style="float:right;color:var(--orange)">↗</span></a>
+          <a class="contact-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <span
+              style="float:right;color:var(--orange)">↗</span></a>
+          <a class="contact-link" href="https://https://github.com/Onel45/" target="_blank" rel="noopener">GitHub <span
+              style="float:right;color:var(--orange)">↗</span></a>
+          <a class="contact-link" href="https://https://www.instagram.com/showtimeyeyo//" target="_blank"
+            rel="noopener">Instagram <span style="float:right;color:var(--orange)">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><span>© <span id="year"></span> OLEYO NELSON</span><span>DESIGNED WITH INTENTION · BUILT TO GROW ↗</span>
+  </footer>
+
+  <script>
+    // Reveal sections as they enter the viewport.
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
+
+    // Soft cursor glow on devices with a mouse.
+    const glow = document.querySelector('.cursor-glow');
+    window.addEventListener('pointermove', (event) => {
+      glow.style.left = event.clientX + 'px';
+      glow.style.top = event.clientY + 'px';
+    }, { passive: true });
+
+    // Footer year.
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
