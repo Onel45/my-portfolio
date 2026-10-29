@@ -3,8 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0b1512">
+    <meta name="color-scheme" content="light">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="robots" content="noindex, nofollow, noarchive">
     <meta name="description"
         content="OLEYO NELSON — computer science student, creative developer, and basketball player.">
@@ -22,6 +27,21 @@
             --accent: #3ddc97;
             --line: rgba(255, 255, 255, .13);
             --max: 1240px;
+            --sat: env(safe-area-inset-top, 0px);
+            --sar: env(safe-area-inset-right, 0px);
+            --sab: env(safe-area-inset-bottom, 0px);
+            --sal: env(safe-area-inset-left, 0px);
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
         }
 
         * {
@@ -60,7 +80,7 @@
         }
 
         .wrap {
-            width: min(var(--max), calc(100% - 9vw));
+            width: min(var(--max), calc(100% - 9vw - var(--sal) - var(--sar)));
             margin: 0 auto;
         }
 
@@ -72,7 +92,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 25px 4.5vw;
+            padding: calc(25px + var(--sat)) calc(4.5vw + var(--sar)) 25px calc(4.5vw + var(--sal));
             color: white;
         }
 
@@ -141,8 +161,10 @@
 
         .hero {
             min-height: 790px;
+            height: 100vh;
             height: 100svh;
             max-height: 1000px;
+            padding-top: var(--sat);
             position: relative;
             overflow: hidden;
             background: #0b1512;
@@ -169,7 +191,7 @@
         .hero-content {
             position: relative;
             z-index: 1;
-            width: min(var(--max), calc(100% - 9vw));
+            width: min(var(--max), calc(100% - 9vw - var(--sal) - var(--sar)));
             margin: 50px auto 0;
         }
 
@@ -248,7 +270,7 @@
 
         .hero-index {
             position: absolute;
-            right: 4.5vw;
+            right: calc(4.5vw + var(--sar));
             top: 50%;
             writing-mode: vertical-rl;
             color: #ffffff90;
@@ -432,6 +454,178 @@
             font-size: .65rem;
         }
 
+        /* About: tabs */
+        .about-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            min-height: 44px;
+            padding: 10px 16px;
+            border: 1px solid #ffffff30;
+            background: transparent;
+            color: #c2d0c9;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: .8rem;
+            cursor: pointer;
+            transition: background .25s, color .25s, border-color .25s, transform .25s;
+        }
+
+        .tab:hover {
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0b1512;
+        }
+
+        .tab:focus-visible,
+        .ball:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .tab-panels {
+            min-height: 150px;
+        }
+
+        .tab-panel[hidden] {
+            display: none;
+        }
+
+        .tab-panel.active {
+            animation: rise .5s both;
+        }
+
+        .stat strong b {
+            font-weight: inherit;
+        }
+
+        /* About: floating language chips */
+        .chips {
+            position: absolute;
+            width: min(100%, 400px);
+            aspect-ratio: 1;
+            animation: spin 25s linear infinite;
+            pointer-events: none;
+        }
+
+        .chip {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #12261f;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 20px #3ddc9733;
+            animation: spin-rev 25s linear infinite;
+        }
+
+        .chip em {
+            font-style: normal;
+            font-family: "DM Mono", monospace;
+            font-size: .62rem;
+            letter-spacing: .05em;
+        }
+
+        .chip.c1 { top: -4%; left: 44%; }
+        .chip.c2 { top: 44%; right: -6%; }
+        .chip.c3 { bottom: -4%; left: 40%; }
+        .chip.c4 { top: 44%; left: -6%; }
+
+        /* About: tilt card + typing */
+        .about .visual-card {
+            transform: perspective(900px) rotate(-4deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+            will-change: transform;
+        }
+
+        .about .visual-card:hover {
+            transform: perspective(900px) rotate(0deg) translateY(-8px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+        }
+
+        .about .visual-card.tilting {
+            transition: transform .12s linear;
+        }
+
+        .typed {
+            color: var(--accent);
+        }
+
+        .caret {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--accent);
+            margin-left: 3px;
+            vertical-align: -.15em;
+            animation: blink 1s steps(1) infinite;
+        }
+
+        /* About: basketball */
+        .ball {
+            position: absolute;
+            right: 2%;
+            bottom: 0;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: 0;
+            color: #9fb2a9;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .ball svg {
+            width: 52px;
+            height: 52px;
+            filter: drop-shadow(0 10px 14px #00000066);
+        }
+
+        .ball.shoot svg {
+            animation: bounce .8s ease-out;
+        }
+
+        .ball-count {
+            font-size: .58rem;
+        }
+
+        .ball-count b {
+            color: var(--accent);
+        }
+
+        @keyframes spin-rev {
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0) rotate(0); }
+            30% { transform: translateY(-70px) rotate(180deg); }
+            55% { transform: translateY(0) rotate(300deg); }
+            72% { transform: translateY(-24px) rotate(380deg); }
+            100% { transform: translateY(0) rotate(420deg); }
+        }
+
         .skills {
             background: #dce8e1;
         }
@@ -590,6 +784,116 @@
             color: #52635b;
         }
 
+        .tags a {
+            font-size: .62rem;
+            border: 1px solid #d3e0d9;
+            padding: 9px 11px;
+            color: #52635b;
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background .25s, color .25s, border-color .25s;
+        }
+
+        .tags a:hover {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: white;
+        }
+
+        .work-block {
+            margin-top: 70px;
+        }
+
+        .work-block h3 {
+            font-size: 1.6rem;
+            letter-spacing: -.05em;
+            margin-bottom: 22px;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .work-card {
+            background: #0f1f1a;
+            color: white;
+            border-radius: 4px;
+            padding: 34px 32px;
+            display: flex;
+            flex-direction: column;
+            transition: transform .4s, box-shadow .4s;
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 55px #0b15122a;
+        }
+
+        .work-card .mono {
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .work-card h4 {
+            font-size: 1.5rem;
+            letter-spacing: -.05em;
+        }
+
+        .work-card p {
+            color: #b7c7bf;
+            font-size: .88rem;
+            line-height: 1.7;
+            margin-top: 12px;
+        }
+
+        .work-card ul {
+            list-style: none;
+            margin-top: 16px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .work-card li {
+            font-size: .8rem;
+            color: #d4e0da;
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .work-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: .5em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .work-card .tags span,
+        .work-card .tags a {
+            border-color: #ffffff30;
+            color: #c3d6cc;
+        }
+
+        .work-card .tags a:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0b1512;
+        }
+
+        @media (max-width:850px) {
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .basketball {
             background: var(--accent);
             color: #0b1512;
@@ -645,7 +949,9 @@
         }
 
         .contact-link {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 16px;
             font-size: clamp(1.2rem, 3vw, 2rem);
             letter-spacing: -.05em;
             border-bottom: 1px solid #ffffff30;
@@ -655,6 +961,91 @@
 
         .contact-link:hover {
             color: var(--accent);
+        }
+
+        .contact-link .arrow {
+            margin-left: auto;
+            color: var(--accent);
+        }
+
+        .contact-link .ico {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            fill: currentColor;
+        }
+
+        .contact-link .ico-wa {
+            width: 22px;
+            height: 22px;
+            margin: 4px;
+        }
+
+        .contact-link small {
+            display: block;
+            font-size: .7rem;
+            letter-spacing: .02em;
+            color: #7f948a;
+            margin-top: 2px;
+        }
+
+        .lang-block {
+            margin-top: 60px;
+        }
+
+        .lang-block h3 {
+            font-size: 1.5rem;
+            letter-spacing: -.05em;
+            margin-bottom: 8px;
+        }
+
+        .lang-block > p {
+            color: #5d6b65;
+            font-size: .85rem;
+            line-height: 1.7;
+            max-width: 560px;
+        }
+
+        .lang-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .lang {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border: 1px solid #bfd1c7;
+            background: #eef3ef;
+            font-weight: 700;
+            font-size: .9rem;
+            letter-spacing: -.02em;
+            transition: background .3s, color .3s, transform .3s;
+        }
+
+        .lang:hover {
+            background: var(--ink);
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        .lang i {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .lang span {
+            font-family: "DM Mono", monospace;
+            font-size: .62rem;
+            color: #7f9489;
+            text-transform: uppercase;
+            letter-spacing: .1em;
         }
 
         .contact-meta {
@@ -670,11 +1061,90 @@
             background: #0b1512;
             color: #7f948a;
             border-top: 1px solid #ffffff1a;
-            padding: 22px 4.5vw;
+            padding: 22px calc(4.5vw + var(--sar)) calc(22px + var(--sab)) calc(4.5vw + var(--sal));
             display: flex;
             justify-content: space-between;
             gap: 20px;
             font-size: .68rem;
+        }
+
+        /* Cookie banner */
+        .cookie-banner {
+            position: fixed;
+            z-index: 100;
+            left: calc(16px + var(--sal));
+            right: calc(16px + var(--sar));
+            bottom: calc(16px + var(--sab));
+            max-width: 560px;
+            margin: 0 auto;
+            background: #0f1f1a;
+            color: #e0e8e4;
+            border: 1px solid #ffffff25;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 20px 50px #00000066;
+            transform: translateY(140%);
+            opacity: 0;
+            transition: transform .5s ease, opacity .5s ease;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cookie-banner[hidden] {
+            display: none;
+        }
+
+        .cookie-banner h4 {
+            font-size: 1rem;
+            letter-spacing: -.03em;
+            margin-bottom: 6px;
+        }
+
+        .cookie-banner p {
+            font-size: .8rem;
+            line-height: 1.6;
+            color: #9fb2a9;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .cookie-actions button {
+            flex: 1;
+            min-height: 44px;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: .75rem;
+            cursor: pointer;
+            border: 1px solid var(--accent);
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .cookie-actions .accept {
+            background: var(--accent);
+            color: #0b1512;
+        }
+
+        .cookie-actions .decline {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .cookie-actions button:hover {
+            transform: translateY(-2px);
+        }
+
+        .cookie-actions button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
         }
 
         .reveal {
@@ -785,19 +1255,23 @@
 
             .wrap,
             .hero-content {
-                width: calc(100% - 40px);
+                width: calc(100% - 40px - var(--sal) - var(--sar));
             }
 
             .nav {
-                padding: 20px;
+                padding: calc(20px + var(--sat)) calc(20px + var(--sar)) 20px calc(20px + var(--sal));
             }
 
             .nav-cta {
-                padding: 10px 12px;
+                padding: 12px 14px;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
             }
 
             .hero {
                 min-height: 690px;
+                height: 94vh;
                 height: 94svh;
             }
 
@@ -862,6 +1336,93 @@
             }
         }
 
+        /* Tablets and small laptops */
+        @media (min-width:521px) and (max-width:1100px) {
+            .skill-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-body {
+                padding: 30px 26px;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width:380px) {
+            .brand {
+                font-size: 1rem;
+            }
+
+            .brand-mark {
+                width: 32px;
+                height: 32px;
+            }
+
+            .nav-cta {
+                font-size: .62rem;
+            }
+
+            .lang {
+                flex-wrap: wrap;
+            }
+
+            .contact-meta {
+                flex-direction: column;
+            }
+
+            .cookie-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Phones in landscape (short screens) */
+        @media (max-height:520px) and (orientation:landscape) {
+            .hero {
+                height: auto;
+                min-height: 0;
+                max-height: none;
+                padding: calc(90px + var(--sat)) 0 60px;
+            }
+
+            .hero-index {
+                display: none;
+            }
+
+            .cookie-banner {
+                max-width: 440px;
+                padding: 14px;
+            }
+        }
+
+        /* Large and ultra-wide screens */
+        @media (min-width:1800px) {
+            html {
+                font-size: 112.5%;
+            }
+        }
+
+        /* Touch devices: no hover-only effects, no cursor glow */
+        @media (hover:none) {
+            .cursor-glow {
+                display: none;
+            }
+
+            .skill:hover,
+            .project:hover,
+            .visual-card:hover,
+            .lang:hover {
+                transform: none;
+            }
+
+            .project:hover .project-image img {
+                transform: none;
+            }
+
+            .contact-link {
+                padding: 20px 0;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
 
             *,
@@ -913,24 +1474,40 @@
                 <div class="reveal">
                     <div class="section-label mono">A LITTLE ABOUT ME</div>
                     <h2>Curiosity is<br>my <span style="color:var(--accent)">superpower.</span></h2>
-                    <p class="about-copy">I’m <strong>Oleyo Nelson</strong>, a Computer Science student with a passion
-                        for technology, creativity, and sport. I enjoy learning how things work, building practical
-                        digital experiences, and finding new ways to solve problems. Away from the screen, basketball
-                        keeps me disciplined, competitive, and team-focused.</p>
+                    <div class="about-tabs" role="tablist" aria-label="About Oleyo">
+                        <button class="tab active" role="tab" id="t-dev" aria-selected="true" aria-controls="p-dev" type="button">&lt;/&gt; Developer</button>
+                        <button class="tab" role="tab" id="t-ath" aria-selected="false" aria-controls="p-ath" type="button">🏀 Athlete</button>
+                        <button class="tab" role="tab" id="t-lrn" aria-selected="false" aria-controls="p-lrn" type="button">✦ Learner</button>
+                    </div>
+                    <div class="tab-panels">
+                        <p class="about-copy tab-panel active" role="tabpanel" id="p-dev" aria-labelledby="t-dev">I’m <strong>Oleyo Nelson</strong>, a Computer Science student with a passion for technology and creativity. I enjoy building practical digital experiences and finding new ways to solve problems.</p>
+                        <p class="about-copy tab-panel" role="tabpanel" id="p-ath" aria-labelledby="t-ath" hidden>Away from the screen, <strong>basketball</strong> keeps me disciplined, competitive, and team-focused. The court taught me to show up, trust the team, and keep improving.</p>
+                        <p class="about-copy tab-panel" role="tabpanel" id="p-lrn" aria-labelledby="t-lrn" hidden>I enjoy <strong>learning how things work</strong>. Every project, community and experiment is another step toward the next level.</p>
+                    </div>
                     <div class="stats">
                         <div class="stat"><strong>01</strong><span>Curious mindset</span></div>
                         <div class="stat"><strong>24/7</strong><span>Always learning</span></div>
-                        <div class="stat"><strong>100%</strong><span>Driven by growth</span></div>
+                        <div class="stat"><strong><b data-count="100">0</b>%</strong><span>Driven by growth</span></div>
                     </div>
                 </div>
                 <div class="about-visual reveal">
                     <div class="orbit"></div>
-                    <div class="visual-card">
-                        <div class="mono" style="color:#9fb2a9">CURRENT MODE / BUILD & LEARN</div>
+                    <div class="chips" aria-hidden="true">
+                        <span class="chip c1"><em>JS</em></span>
+                        <span class="chip c2"><em>CSS</em></span>
+                        <span class="chip c3"><em>PY</em></span>
+                        <span class="chip c4"><em>JAVA</em></span>
+                    </div>
+                    <div class="visual-card" id="tiltCard">
+                        <div class="mono" style="color:#9fb2a9">I'M A <span id="typed" class="typed"></span><span class="caret"></span></div>
                         <div class="big-code">HELLO,<br>I'M <span>OLEYO</span><br><span
                                 style="color:white">NELSON.</span></div>
                         <div class="card-foot"><span>CREATIVE THINKER</span><span>EST. ALWAYS</span></div>
                     </div>
+                    <button class="ball" id="ball" type="button" aria-label="Shoot a basket">
+                        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#f08a24"/><g fill="none" stroke="#0b1512" stroke-width="2"><path d="M2 24h44M24 2v44"/><path d="M8 8c9 6 9 26 0 32M40 8c-9 6-9 26 0 32"/></g></svg>
+                        <span class="mono ball-count">TAP TO SHOOT · <b id="buckets">0</b></span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -963,6 +1540,19 @@
                         <p>Discipline, teamwork, resilience, and a constant drive to get better.</p>
                     </article>
                 </div>
+
+                <div class="lang-block reveal">
+                    <div class="section-label mono">LANGUAGES I'M FLUENT IN</div>
+                    <h3>The languages I code in.</h3>
+                    <p>The core languages behind my projects, including the TCC ordering app.</p>
+                    <div class="lang-grid">
+                        <div class="lang"><i></i>JavaScript <span>Logic &amp; interactivity</span></div>
+                        <div class="lang"><i></i>CSS <span>Styling &amp; layout</span></div>
+                        <div class="lang"><i></i>Python <span>Scripting &amp; backend</span></div>
+                        <div class="lang"><i></i>Java <span>Core programming</span></div>
+                        <div class="lang"><i></i>HTML <span>Structure &amp; markup</span></div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -988,7 +1578,10 @@
                             </div>
                             <p>The communities I learn, build and grow with, surrounded by people who love technology
                                 and sharing what they know.</p>
-                            <div class="tags"><span>OPEN SOURCE KIGALI</span><span>GOOGLE STUDENT DEVELOPERS</span>
+                            <div class="tags">
+                                <a href="https://guild.host/open-source-kigali" target="_blank" rel="noopener">OPEN SOURCE KIGALI ↗</a>
+                                <a href="https://gdsc.community.dev/" target="_blank" rel="noopener">GOOGLE STUDENT DEVELOPERS ↗</a>
+                                <a href="#contact">CONNECT WITH ME ↗</a>
                             </div>
                         </div>
                     </article>
@@ -1010,10 +1603,46 @@
                             </div>
                             <p>A space for experiments, small coding projects, and the lessons learned while becoming a
                                 better developer.</p>
-                            <div class="tags"><span>COMPUTER SCIENCE</span><span>EXPERIMENTS</span><span>LEARNING</span>
+                            <div class="tags">
+                                <a href="#about">COMPUTER SCIENCE ↗</a>
+                                <a href="#my-work">EXPERIMENTS ↗</a>
+                                <a href="#skills">LEARNING ↗</a>
                             </div>
                         </div>
                     </article>
+                </div>
+
+                <div class="work-block reveal" id="my-work">
+                    <div class="section-label mono">PROJECTS I'VE WORKED ON</div>
+                    <h3>Things I've built.</h3>
+                    <div class="work-grid">
+                        <article class="work-card">
+                            <div class="mono">PROJECT / 01</div>
+                            <h4>The Canadian Chef (TCC) App</h4>
+                            <p>A mobile-first food ordering app I designed for the restaurant The Canadian Chef,
+                                inspired by kfc.rw and built around the restaurant's real menus and price lists.</p>
+                            <ul>
+                                <li>Menu browsing with category chips, search and filters</li>
+                                <li>Item detail pages with quantity stepper and Add to Cart</li>
+                                <li>Mobile money checkout</li>
+                                <li>Separate kitchen screen that displays incoming orders</li>
+                            </ul>
+                            <div class="tags"><span>JAVASCRIPT</span><span>HTML</span><span>CSS</span></div>
+                        </article>
+                        <article class="work-card">
+                            <div class="mono">PROJECT / 02</div>
+                            <h4>This Portfolio</h4>
+                            <p>The site you're on: a responsive, animated personal portfolio I designed and coded
+                                by hand, with safe-area support for modern phones and a cookie consent banner.</p>
+                            <ul>
+                                <li>Responsive on phones, tablets and desktops</li>
+                                <li>Scroll animations and reduced-motion support</li>
+                                <li>Direct contact links to WhatsApp, Instagram, Discord and email</li>
+                            </ul>
+                            <div class="tags"><span>JAVASCRIPT</span><span>HTML</span><span>CSS</span>
+                                <a href="#contact">GET IN TOUCH ↗</a></div>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1038,21 +1667,42 @@
                     <div class="contact-meta"><span>OLEYO NELSON</span><span>AVAILABLE FOR CONNECTIONS</span></div>
                 </div>
                 <div class="reveal">
-                    <!-- Replace the placeholder links below with your real contact details. -->
-                    <a class="contact-link" href="mailto:your.email@example.com">Email me <span
-                            style="float:right;color:var(--accent)">↗</span></a>
-                    <a class="contact-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn
-                        <span style="float:right;color:var(--accent)">↗</span></a>
-                    <a class="contact-link" href="https://github.com/" target="_blank" rel="noopener">GitHub <span
-                            style="float:right;color:var(--accent)">↗</span></a>
-                    <a class="contact-link" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram
-                        <span style="float:right;color:var(--accent)">↗</span></a>
+                    <!-- LinkedIn and GitHub still point to the generic home pages: replace with your profile URLs. -->
+                    <a class="contact-link" href="mailto:oleyonelson88@gmail.com" aria-label="Email">
+                        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.6 2L12 12.6 19.4 7H4.6zM20 8.9l-8 6-8-6V17h16V8.9z"/></svg>
+                        <span>Email me<small>oleyonelson88@gmail.com</small></span><span class="arrow">↗</span></a>
+                    <a class="contact-link" href="https://wa.me/250796696874" target="_blank" rel="noopener" aria-label="WhatsApp">
+                        <svg class="ico ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.93 9.93 0 1 0 12.04 2zm0 18.1a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.94 3.83zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.09-.39-.13-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.76-1.85-.2-.48-.4-.42-.56-.42h-.47c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.16 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.23-.16-.48-.29z"/></svg>
+                        <span>WhatsApp<small>+250 796 696 874</small></span><span class="arrow">↗</span></a>
+                    <a class="contact-link" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3V9.5zm6.5 0h3.83v1.57h.06c.53-1 1.84-2.07 3.78-2.07 4.04 0 4.78 2.66 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.32-1.96 2.69V21h-4V9.5z"/></svg>
+                        <span>LinkedIn</span><span class="arrow">↗</span></a>
+                    <a class="contact-link" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+                        <span>GitHub</span><span class="arrow">↗</span></a>
+                    <a class="contact-link" href="https://www.instagram.com/showtimeyeyo/?utm_source=ig_web_button_share_sheet"
+                        target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.25-3.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/></svg>
+                        <span>Instagram<small>@showtimeyeyo</small></span><span class="arrow">↗</span></a>
+                    <a class="contact-link" href="https://discord.com/users/1245124336944152686" target="_blank" rel="noopener" aria-label="Discord">
+                        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.43 2.9l-.23.46a18.3 18.3 0 0 0-6.4 0l-.23-.46a19.8 19.8 0 0 0-4.89 1.47C.53 9.05-.32 13.62.1 18.13a19.9 19.9 0 0 0 6 3l.48-.66a12.9 12.9 0 0 1-2-.95l.5-.37a14.2 14.2 0 0 0 12.1 0l.5.37c-.64.38-1.3.7-2 .95l.48.66a19.9 19.9 0 0 0 6-3c.5-5.23-.84-9.76-3.34-13.76zM8.35 15.37c-1.18 0-2.15-1.08-2.15-2.4s.95-2.4 2.15-2.4 2.17 1.08 2.15 2.4c0 1.32-.95 2.4-2.15 2.4zm7.3 0c-1.18 0-2.15-1.08-2.15-2.4s.95-2.4 2.15-2.4 2.17 1.08 2.15 2.4c0 1.32-.95 2.4-2.15 2.4z"/></svg>
+                        <span>Discord</span><span class="arrow">↗</span></a>
                 </div>
             </div>
         </section>
     </main>
     <footer><span>© <span id="year"></span> OLEYO NELSON</span><span>DESIGNED WITH INTENTION · BUILT TO GROW ↗</span>
     </footer>
+
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieTitle" aria-live="polite" hidden>
+        <h4 id="cookieTitle">🍪 Cookies</h4>
+        <p>This site uses a small cookie to remember your choice and to count your visits. Nothing is shared with
+            third parties.</p>
+        <div class="cookie-actions">
+            <button type="button" class="accept" id="cookieAccept">Accept</button>
+            <button type="button" class="decline" id="cookieDecline">Decline</button>
+        </div>
+    </div>
 
     <script>
         const revealObserver = new IntersectionObserver((entries) => {
@@ -1072,6 +1722,143 @@
         }, { passive: true });
 
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ---- About section interactions ----
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Tabs
+        const tabs = document.querySelectorAll('.about-tabs .tab');
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach((t) => {
+                    const on = t === tab;
+                    t.classList.toggle('active', on);
+                    t.setAttribute('aria-selected', on);
+                    const panel = document.getElementById(t.getAttribute('aria-controls'));
+                    panel.hidden = !on;
+                    panel.classList.toggle('active', on);
+                });
+            });
+        });
+
+        // Count-up stat
+        const counter = document.querySelector('[data-count]');
+        if (counter) {
+            const target = parseInt(counter.dataset.count, 10);
+            const countObserver = new IntersectionObserver((entries) => {
+                if (!entries[0].isIntersecting) return;
+                countObserver.disconnect();
+                if (reduceMotion) { counter.textContent = target; return; }
+                const start = performance.now();
+                const step = (now) => {
+                    const p = Math.min((now - start) / 1400, 1);
+                    counter.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+                    if (p < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            }, { threshold: 0.6 });
+            countObserver.observe(counter);
+        }
+
+        // Typing effect
+        const typedEl = document.getElementById('typed');
+        const words = ['CODER', 'HOOPER', 'BUILDER', 'LEARNER', 'TEAMMATE'];
+        if (reduceMotion) {
+            typedEl.textContent = words[0];
+        } else {
+            let w = 0, c = 0, deleting = false;
+            const type = () => {
+                const word = words[w];
+                typedEl.textContent = word.slice(0, c);
+                if (!deleting && c < word.length) { c++; setTimeout(type, 110); }
+                else if (!deleting) { deleting = true; setTimeout(type, 1400); }
+                else if (c > 0) { c--; setTimeout(type, 60); }
+                else { deleting = false; w = (w + 1) % words.length; setTimeout(type, 300); }
+            };
+            type();
+        }
+
+        // 3D tilt card (mouse and pen only)
+        const tiltCard = document.getElementById('tiltCard');
+        if (!reduceMotion) {
+            tiltCard.addEventListener('pointermove', (e) => {
+                if (e.pointerType === 'touch') return;
+                const r = tiltCard.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                tiltCard.classList.add('tilting');
+                tiltCard.style.setProperty('--ry', (x * 14) + 'deg');
+                tiltCard.style.setProperty('--rx', (-y * 14) + 'deg');
+            });
+            tiltCard.addEventListener('pointerleave', () => {
+                tiltCard.classList.remove('tilting');
+                tiltCard.style.setProperty('--rx', '0deg');
+                tiltCard.style.setProperty('--ry', '0deg');
+            });
+        }
+
+        // Basketball
+        const ball = document.getElementById('ball');
+        const bucketsEl = document.getElementById('buckets');
+        let buckets = 0;
+        ball.addEventListener('click', () => {
+            buckets++;
+            bucketsEl.textContent = buckets;
+            ball.classList.remove('shoot');
+            void ball.offsetWidth;
+            if (!reduceMotion) ball.classList.add('shoot');
+        });
+
+        // ---- Cookies ----
+        const Cookies = {
+            set(name, value, days) {
+                const secure = location.protocol === 'https:' ? '; Secure' : '';
+                const expires = new Date(Date.now() + days * 864e5).toUTCString();
+                document.cookie = name + '=' + encodeURIComponent(value) +
+                    '; expires=' + expires + '; path=/; SameSite=Lax' + secure;
+            },
+            get(name) {
+                const match = document.cookie.split('; ').find((c) => c.startsWith(name + '='));
+                return match ? decodeURIComponent(match.split('=')[1]) : null;
+            },
+            remove(name) {
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax';
+            }
+        };
+
+        const banner = document.getElementById('cookieBanner');
+
+        function trackVisit() {
+            const visits = parseInt(Cookies.get('visit_count') || '0', 10) + 1;
+            Cookies.set('visit_count', visits, 180);
+            Cookies.set('last_visit', new Date().toISOString(), 180);
+        }
+
+        function closeBanner() {
+            banner.classList.remove('show');
+            setTimeout(() => { banner.hidden = true; }, 500);
+        }
+
+        const consent = Cookies.get('cookie_consent');
+        if (consent === 'accepted') {
+            trackVisit();
+        } else if (consent === null) {
+            banner.hidden = false;
+            requestAnimationFrame(() => requestAnimationFrame(() => banner.classList.add('show')));
+        }
+
+        document.getElementById('cookieAccept').addEventListener('click', () => {
+            Cookies.set('cookie_consent', 'accepted', 180);
+            trackVisit();
+            closeBanner();
+        });
+
+        document.getElementById('cookieDecline').addEventListener('click', () => {
+            Cookies.set('cookie_consent', 'declined', 180);
+            Cookies.remove('visit_count');
+            Cookies.remove('last_visit');
+            closeBanner();
+        });
 
         // Light deterrents against casual copying (not real security).
         document.addEventListener('contextmenu', (e) => e.preventDefault());
