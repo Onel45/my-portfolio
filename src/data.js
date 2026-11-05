@@ -5,8 +5,9 @@ export const navLinks = [
 export const skills = [
   { title: 'Programming', text: 'Building a strong foundation in computer science and software development.' },
   { title: 'Web Experiences', text: 'Exploring clean interfaces, responsive layouts, and interactive websites.' },
+  { title: 'UI/UX Design', text: 'Designing clear, intuitive interfaces and experiences that feel good to use.' },
   { title: 'Problem Solving', text: 'Breaking big challenges into smaller, practical steps.' },
-  { title: 'Basketball', text: 'Discipline, teamwork, resilience, and a constant drive to get better.' },
+  { title: 'Basketball', text: 'Discipline, teamwork, resilience, and a constant drive to get better.', gallery: true },
 ];
 
 export const languages = [
@@ -74,4 +75,15 @@ export const contacts = [
   { label: 'GitHub', href: 'https://github.com/', aria: 'GitHub', icon: 'github', ext: true },
   { label: 'Instagram', sub: '@showtimeyeyo', href: 'https://www.instagram.com/showtimeyeyo/?utm_source=ig_web_button_share_sheet', aria: 'Instagram', icon: 'instagram', ext: true },
   { label: 'Discord', href: 'https://discord.com/users/1245124336944152686', aria: 'Discord', icon: 'discord', ext: true },
+];
+
+// Photos live in src/assets/gallery (basketball-1.jpg ... basketball-6.jpg). Edit captions and descriptions here.
+// `file` is the number in the file name; the order below is the order they appear on the page.
+export const gallery = [
+  { file: 6, caption: 'Arena day', alt: 'Two players pose together inside an arena' },
+  { file: 1, caption: 'Studio day', alt: 'A player in a grey ASK jersey holds a basketball and points at the camera' },
+  { file: 2, caption: 'Good company', alt: 'Two players smile and flash peace signs on an outdoor court' },
+  { file: 3, caption: 'Studio session', alt: 'A player in a grey ASK jersey sits on the studio floor with a basketball' },
+  { file: 4, caption: 'Bench erupts', alt: 'Teammates celebrate on the bench during a game' },
+  { file: 5, caption: 'Game face', alt: 'A player in a grey ASK jersey is filmed close up after a game' },
 ];

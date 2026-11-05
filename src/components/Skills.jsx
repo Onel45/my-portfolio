@@ -11,7 +11,7 @@ const stickers = {
   HTML: { t: 'HTML', bg: '#e34f26', fg: '#ffffff' },
 };
 
-export default function Skills() {
+export default function Skills({ onOpenGallery }) {
   const [current, setCurrent] = useState(null);
   const sticker = useRef(null);
 
@@ -33,12 +33,21 @@ export default function Skills() {
         </Reveal>
         <div className="swipe-hint mono">SWIPE SIDEWAYS</div>
         <div className="skill-grid">
-          {skills.map((s2) => (
+          {skills.map((s2) => (s2.gallery ? (
+            <Reveal as="article" className="skill is-link" key={s2.title} role="button" tabIndex={0}
+              data-cursor="VIEW" aria-label="Basketball: open the photo gallery"
+              onClick={onOpenGallery}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpenGallery(e); } }}>
+              <h3>{s2.title}</h3>
+              <p>{s2.text}</p>
+              <span className="skill-more">View photos ↗</span>
+            </Reveal>
+          ) : (
             <Reveal as="article" className="skill" key={s2.title}>
               <h3>{s2.title}</h3>
               <p>{s2.text}</p>
             </Reveal>
-          ))}
+          )))}
         </div>
 
         <Reveal className="lang-block">
