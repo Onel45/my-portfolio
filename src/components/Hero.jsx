@@ -3,7 +3,8 @@ const BASE = import.meta.env.BASE_URL;
 export default function Hero() {
   return (
     <header className="hero" id="home">
-      <div className="hero-bg" style={{ '--hero-img': `url(${BASE}nice1.jpg)` }} />
+      <div className="hero-bg" style={{ '--hero-img': `url(${BASE}/nice1.jpg)` }} />
+
       <div className="hero-content">
         <div className="eyebrow mono">Computer Science · UI/UX Design · Basketball · Big Ideas</div>
         <h1>I BUILD<br /><span className="accent">DIGITAL</span><br /><span className="outline">FUTURES.</span></h1>
