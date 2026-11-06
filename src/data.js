@@ -56,7 +56,7 @@ export const work = [
   },
   {
     title: 'This Portfolio',
-    text: "The site you're on: a responsive, animated personal portfolio I designed and coded by hand, with safe area support for modern phones and a cookie consent banner.",
+    text: "The site you're on: a responsive, animated personal portfolio I designed and coded by hand, with safe area support for modern phones.",
     bullets: [
       'Responsive on phones, tablets and desktops',
       'Scroll animations and reduced motion support',

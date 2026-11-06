@@ -9,7 +9,6 @@ import Projects from './components/Projects.jsx';
 import Basketball from './components/Basketball.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
-import CookieBanner from './components/CookieBanner.jsx';
 import Gallery from './components/Gallery.jsx';
 
 export default function App() {
@@ -56,7 +55,6 @@ export default function App() {
       </main>
       <Footer />
       <Gallery open={gallery.open} origin={gallery} onClose={closeGallery} />
-      <CookieBanner ready={ready} />
     </div>
   );
 }
