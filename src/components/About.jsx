@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
+import portrait from '../assets/portrait.jpg';
 import Reveal from './Reveal.jsx';
-import { reduceMotion, useCountUp, useTyping } from '../hooks.js';
-
-const words = ['CODER', 'HOOPER', 'BUILDER', 'LEARNER', 'TEAMMATE'];
+import { reduceMotion, useCountUp } from '../hooks.js';
 
 const tabs = [
   { id: 'dev', label: '</> Developer' },
@@ -12,8 +11,6 @@ const tabs = [
 
 export default function About() {
   const [tab, setTab] = useState('dev');
-  const [buckets, setBuckets] = useState(0);
-  const typed = useTyping(words);
   const [countRef, count] = useCountUp(100);
   const card = useRef(null);
 
@@ -21,8 +18,8 @@ export default function About() {
     if (reduceMotion || e.pointerType === 'touch') return;
     const el = card.current, r = el.getBoundingClientRect();
     el.classList.add('tilting');
-    el.style.setProperty('--ry', ((e.clientX - r.left) / r.width - 0.5) * 14 + 'deg');
-    el.style.setProperty('--rx', -((e.clientY - r.top) / r.height - 0.5) * 14 + 'deg');
+    el.style.setProperty('--ry', ((e.clientX - r.left) / r.width - 0.5) * 7 + 'deg');
+    el.style.setProperty('--rx', -((e.clientY - r.top) / r.height - 0.5) * 7 + 'deg');
   };
   const untilt = () => {
     const el = card.current;
@@ -69,20 +66,24 @@ export default function About() {
             <span className="chip c4"><em>JAVA</em></span>
           </div>
           <div className="visual-card" ref={card} onPointerMove={tilt} onPointerLeave={untilt}>
-            <div className="mono" style={{ color: '#9fb2a9' }}>I'M A <span className="typed">{typed}</span><span className="caret" /></div>
-            <div className="big-code">HELLO,<br />I'M <span>OLEYO</span><br /><span style={{ color: 'white' }}>NELSON.</span></div>
-            <div className="card-foot"><span>CREATIVE THINKER</span><span>EST. ALWAYS</span></div>
+            <div className="pc-photo">
+              <img src={portrait} alt="Oleyo Nelson" draggable="false" />
+              <span className="pc-status mono"><i />Available for connections</span>
+            </div>
+            <div className="pc-info">
+              <div className="pc-role mono">Creative Developer</div>
+              <div className="big-code">Oleyo Nelson</div>
+              <div className="pc-sub">Computer Science student</div>
+            </div>
+            <div className="pc-langs" aria-hidden="true">
+              <span>JavaScript</span><span>Python</span><span>Java</span><span>HTML</span><span>CSS</span>
+            </div>
+            <div className="pc-facts">
+              <div><strong>5</strong><span className="mono">Languages</span></div>
+              <div><strong>3</strong><span className="mono">Projects</span></div>
+              <div><strong>3</strong><span className="mono">Communities</span></div>
+            </div>
           </div>
-          <button className="ball" type="button" aria-label="Shoot a basket" data-cursor="SHOOT" onClick={() => setBuckets((b) => b + 1)}>
-            <svg key={buckets} className={buckets ? 'go' : ''} viewBox="0 0 48 48" aria-hidden="true">
-              <circle cx="24" cy="24" r="22" fill="#f08a24" />
-              <g fill="none" stroke="#0b1512" strokeWidth="2">
-                <path d="M2 24h44M24 2v44" />
-                <path d="M8 8c9 6 9 26 0 32M40 8c-9 6-9 26 0 32" />
-              </g>
-            </svg>
-            <span className="mono ball-count">TAP TO SHOOT · <b>{buckets}</b></span>
-          </button>
         </Reveal>
       </div>
     </section>
