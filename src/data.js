@@ -70,7 +70,7 @@ export const work = [
 // LinkedIn and GitHub still point to the generic home pages: replace with your profile URLs.
 export const contacts = [
   { label: 'Email me', sub: 'oleyonelson88@gmail.com', href: 'mailto:oleyonelson88@gmail.com', aria: 'Email', icon: 'email' },
-  { label: 'WhatsApp', sub: '+250 796 696 874', href: 'https://wa.me/250796696874', aria: 'WhatsApp', icon: 'whatsapp', ext: true, wa: true },
+  { label: 'WhatsApp', sub: '+211 927 671 652', href: 'https://wa.me/211927671652', aria: 'WhatsApp', icon: 'whatsapp', ext: true, wa: true },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/', aria: 'LinkedIn', icon: 'linkedin', ext: true },
   { label: 'GitHub', href: 'https://github.com/', aria: 'GitHub', icon: 'github', ext: true },
   { label: 'Instagram', sub: '@showtimeyeyo', href: 'https://www.instagram.com/showtimeyeyo/?utm_source=ig_web_button_share_sheet', aria: 'Instagram', icon: 'instagram', ext: true },
