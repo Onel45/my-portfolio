@@ -1,7 +1,13 @@
 import Reveal from './Reveal.jsx';
+import Slideshow from './Slideshow.jsx';
 import { communityTags, playgroundTags, work } from '../data.js';
 
-const BASE = import.meta.env.BASE_URL;
+const shots = import.meta.glob('../assets/community/*.jpg', { eager: true, import: 'default' });
+const slides = [
+  { n: 1, caption: 'Community meetup', alt: 'A large group of developers posing together at an Open Source Kigali meetup' },
+  { n: 2, caption: 'Talk on WikiSuite', alt: 'A speaker presenting WikiSuite at an Open Source Kigali session' },
+  { n: 3, caption: 'Group photo', alt: 'Open Source Kigali community members gathered outside a building next to the community banner' },
+].map((s) => ({ ...s, src: shots['../assets/community/community-' + s.n + '.jpg'] }));
 
 function TagLink({ text, href, ext }) {
   return <a href={href} {...(ext ? { target: '_blank', rel: 'noopener' } : {})}>{text}</a>;
@@ -20,7 +26,7 @@ export default function Projects() {
         <div className="project-list">
           <Reveal as="article" className="project">
             <div className="project-image">
-              <img src={BASE + 'me.jpg'} alt="Oleyo Nelson" loading="lazy" />
+              <Slideshow slides={slides} />
               <span className="image-tag">COMMUNITY</span>
             </div>
             <div className="project-body">
