@@ -3,11 +3,13 @@ import Slideshow from './Slideshow.jsx';
 import { communityTags, playgroundTags, work } from '../data.js';
 
 const shots = import.meta.glob('../assets/community/*.jpg', { eager: true, import: 'default' });
+const BASE = import.meta.env.BASE_URL;
 const slides = [
+  { src: BASE + 'me.jpg', caption: 'Oleyo Nelson', alt: 'Oleyo Nelson' },
   { n: 1, caption: 'Community meetup', alt: 'A large group of developers posing together at an Open Source Kigali meetup' },
   { n: 2, caption: 'Talk on WikiSuite', alt: 'A speaker presenting WikiSuite at an Open Source Kigali session' },
   { n: 3, caption: 'Group photo', alt: 'Open Source Kigali community members gathered outside a building next to the community banner' },
-].map((s) => ({ ...s, src: shots['../assets/community/community-' + s.n + '.jpg'] }));
+].map((s) => (s.n ? { ...s, src: shots['../assets/community/community-' + s.n + '.jpg'] } : s));
 
 function TagLink({ text, href, ext }) {
   return <a href={href} {...(ext ? { target: '_blank', rel: 'noopener' } : {})}>{text}</a>;
