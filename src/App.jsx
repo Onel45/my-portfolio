@@ -10,6 +10,8 @@ import Basketball from './components/Basketball.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Gallery from './components/Gallery.jsx';
+import { Analytics } from '@vercel/analytics/react';
+
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -42,6 +44,7 @@ export default function App() {
 
   return (
     <div className={'app' + (ready ? ' ready' : '')}>
+      <Analytics />
       <Preloader onDone={() => setReady(true)} />
       <Cursor />
       <Nav />
